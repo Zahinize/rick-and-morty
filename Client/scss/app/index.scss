@@ -1,0 +1,114 @@
+@import '../base/colors';
+@import '../base/variables';
+
+/*****BASE styles*****/
+a {
+	color: $primaryLinkColor;
+}
+
+/***** Header Start *****/
+header {
+	color: $primaryColor;
+	font-family: $primaryFontFamilyHeading;
+	font-size: $designDimensionMD;
+	text-transform: uppercase;
+}
+/***** Header End *****/
+
+/***** Content Start *****/
+.content {
+	width: ($fullPercentage - 20);
+	margin: 0 auto;
+}
+.sub-text {
+	width: $fullPercentage;
+	margin: 30px auto;
+	text-align: justify;
+	color: $primaryTextColor;
+	font-size: ($designDimensionSM + 0.2);
+}
+/***** Content End *****/
+
+/***** Grid Start *****/
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 3fr));
+	grid-auto-flow: dense;
+	grid-gap: 10px;
+	width: $fullPercentage;
+	margin: 30px auto;
+	position: relative;
+}
+.item:nth-of-type(odd) {
+	grid-column-end: span 2;
+}
+.item {
+	-webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+	-moz-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+	transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+.item:hover {
+	-webkit-transform: translateY(-6px);
+	-ms-transform: translateY(-6px);
+	transform: translateY(-6px);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+.item .image {
+	width: $fullPercentage;
+	height: 200px;
+	background-color: $primaryColor;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	animation-play-state: paused;
+}
+/***** Grid End *****/
+
+/***** Empty Start *****/
+.empty-state {
+	text-align: center;
+	padding: 10px 0px 25px 0px;
+}
+.empty-state img {
+	width: 25%;
+}
+.loader img {
+	width: 10%;
+}
+.empty-state h2 {
+	font-size: ($designDimensionSM + 0.5);
+}
+/***** Empty End *****/
+
+@media only screen and (max-width: 768px) {
+	.content {
+		width: 90%;
+	}
+	.grid {
+		grid-template-columns: 1fr;
+	}
+	.grid .item {
+		grid-column-end: span 1;
+	}
+	.item {
+		position: relative;
+	}
+	.empty-state img {
+		width: 50%;
+	}
+	.loader img {
+		width: 10%;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	header img {
+		max-height: 70%;
+	}
+	.sub-text {
+		font-size: $designDimensionSM;
+	}
+	.empty-state h2 {
+		font-size: $designDimensionSM;
+	}
+}

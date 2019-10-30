@@ -1,0 +1,15 @@
+node_modules/
+.idea/
+npm-debug.log
+.vscode/
+jsconfig.json
+test.js
+test.html
+logs/
+.DS_Store
+*.log
+*.map
+*.map
+.eslintrc
+.prettierrc
+clientDist

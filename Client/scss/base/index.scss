@@ -1,0 +1,22 @@
+/*****Imported Google Fonts*****/
+@import url(//fonts.googleapis.com/css?family=Lato:300|Lobster);
+
+@import './colors';
+@import './variables';
+@import './utilities/index';
+
+// Layout //
+* {
+	box-sizing: border-box;
+	margin: $numberZero;
+	padding: $numberZero;
+	position: relative;
+}
+html,
+body {
+	background: $primaryBackgroundColor;
+	color: $primaryTextColor;
+	font-family: $primaryFontFamily;
+	font-size: $designDimensionSM; // 1rem = 16px
+	transition: all 0.3s ease;
+}
