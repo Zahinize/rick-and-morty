@@ -15,6 +15,80 @@ function getUniqueNumbers(value, index, arr) {
 	return arr.indexOf(value) === index;
 }
 
+function getCharacterLocationData(id, data) {
+	const DEFAULT_DATA = {
+		name: '',
+		type: '',
+		dimension: '',
+		residentsCount: ''
+	};
+
+	if (!id) return DEFAULT_DATA;
+
+	const filteredLocation = data.filter(object => object.id == id)[0];
+	const { name, type, dimension, residents } = filteredLocation;
+	const resultObject = {
+		name,
+		type,
+		dimension,
+		residentsCount: residents.length
+	};
+
+	return resultObject;
+}
+
+function getCharacterEpisodeData(idArray, data) {
+	const isValidIdArray = !!(idArray && idArray.length);
+	const DEFAULT_DATA = '';
+
+	if (!isValidIdArray) return DEFAULT_DATA;
+
+	const resultString = idArray
+		.map(episodeId => {
+			const filteredEpisode = data.filter(object => object.id == episodeId)[0];
+
+			return filteredEpisode.name;
+		})
+		.join(', ');
+
+	return resultString;
+}
+
+function getFinalCharacterData(inputData) {
+	const { characters, locations, episodes } = inputData;
+
+	return characters.reduce((accumulator, characterObject) => {
+		const {
+			id,
+			name,
+			status,
+			species,
+			gender,
+			origin: { name: originName },
+			location: { name: locationName },
+			locationId,
+			episodeId,
+			image
+		} = characterObject;
+		const locationData = getCharacterLocationData(locationId, locations);
+		const episodeData = getCharacterEpisodeData(episodeId, episodes);
+		const resultObject = {
+			id,
+			name,
+			status,
+			species,
+			gender,
+			origin: originName,
+			location: { ...locationData },
+			episodes: episodeData,
+			image
+		};
+
+		accumulator.push(resultObject);
+		return accumulator;
+	}, []);
+}
+
 function getLocationsAndEpisodes(inputData) {
 	const locationParam = inputData.locations.join(',');
 	const episodeParam = inputData.episodes.join(',');
@@ -66,6 +140,7 @@ router.get('/getData', (req, res) => {
 	return getAllCharacters
 		.then(getTransformedData)
 		.then(getLocationsAndEpisodes)
+		.then(getFinalCharacterData)
 		.then(characterData => {
 			resultData.data = characterData;
 		})
