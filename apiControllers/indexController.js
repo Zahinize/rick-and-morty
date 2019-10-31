@@ -15,6 +15,22 @@ function getUniqueNumbers(value, index, arr) {
 	return arr.indexOf(value) === index;
 }
 
+function getLocationsAndEpisodes(inputData) {
+	const locationParam = inputData.locations.join(',');
+	const episodeParam = inputData.episodes.join(',');
+	const locationPath = LOCATIONS.replace('__LOCATION_IDS__', locationParam);
+	const episodePath = EPISODES.replace('__EPISODE_IDS__', episodeParam);
+	const getLocationData = getData({ uri: locationPath });
+	const getEpisodeData = getData({ uri: episodePath });
+
+	return Promise.join(getLocationData, getEpisodeData, (allLocations, allEpisodes) => {
+		inputData.locations = allLocations;
+		inputData.episodes = allEpisodes;
+
+		return inputData;
+	});
+}
+
 function getTransformedData(inputData) {
 	const resultObject = { characters: [], locations: [], episodes: [] };
 	const locationRegex = /location\/[0-9]{1,5}/;
@@ -49,6 +65,7 @@ router.get('/getData', (req, res) => {
 
 	return getAllCharacters
 		.then(getTransformedData)
+		.then(getLocationsAndEpisodes)
 		.then(characterData => {
 			resultData.data = characterData;
 		})
