@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-import Grid from './Grid/index';
+import CardContainer from './CardContainer/index';
 import Empty from './shared/Empty';
 import Error from './shared/Error';
 import Loader from './shared/Loader';
@@ -43,7 +43,7 @@ class CharacterCards extends Component {
 		else if (isError) return <Error />;
 		else if (!results.length) return <Empty message="It's empty in here! No character found :(" />;
 
-		return <Grid items={results} />;
+		return <CardContainer items={results} />;
 	}
 
 	render() {

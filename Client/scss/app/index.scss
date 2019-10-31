@@ -17,7 +17,7 @@ header {
 
 /***** Content Start *****/
 .content {
-	width: ($fullPercentage - 20);
+	width: ($fullPercentage - 10);
 	margin: 0 auto;
 }
 .sub-text {
@@ -29,40 +29,20 @@ header {
 }
 /***** Content End *****/
 
-/***** Grid Start *****/
-.grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 3fr));
-	grid-auto-flow: dense;
-	grid-gap: 10px;
-	width: $fullPercentage;
-	margin: 30px auto;
-	position: relative;
+/***** Card Start *****/
+.card {
+	max-width: 300px;
+
+	.card-image img {
+		border-radius: $designDimensionBase $designDimensionBase 0 0;
+	}
+
+	.card-content {
+		border-radius: 0 0 $designDimensionBase $designDimensionBase;
+		background: $colorWhite;
+	}
 }
-.item:nth-of-type(odd) {
-	grid-column-end: span 2;
-}
-.item {
-	-webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
-	-moz-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
-	transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
-}
-.item:hover {
-	-webkit-transform: translateY(-6px);
-	-ms-transform: translateY(-6px);
-	transform: translateY(-6px);
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-.item .image {
-	width: $fullPercentage;
-	height: 200px;
-	background-color: $primaryColor;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
-	animation-play-state: paused;
-}
-/***** Grid End *****/
+/***** Card End *****/
 
 /***** Empty Start *****/
 .empty-state {
@@ -81,18 +61,6 @@ header {
 /***** Empty End *****/
 
 @media only screen and (max-width: 768px) {
-	.content {
-		width: 90%;
-	}
-	.grid {
-		grid-template-columns: 1fr;
-	}
-	.grid .item {
-		grid-column-end: span 1;
-	}
-	.item {
-		position: relative;
-	}
 	.empty-state img {
 		width: 50%;
 	}
