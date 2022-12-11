@@ -39,7 +39,7 @@
 		"bluebird": "^3.3.3",
 		"body-parser": "^1.18.3",
 		"compression": "^1.6.1",
-		"express": "^4.17.1",
+		"express": "^4.17.3",
 		"helmet": "^3.13.0",
 		"prop-types": "^15.6.2",
 		"react": "^16.8.3",
